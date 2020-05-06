@@ -1,0 +1,31 @@
+templates:
+  #===========================================================================
+  A4 landscape: !template
+  #===========================================================================
+    reportTemplate: simpleReport.jrxml
+    attributes:
+      map: !map
+        maxDpi: 400
+        width: 780
+        height: 330
+    processors:
+    - !reportBuilder # compile all reports in current directory
+      directory: '.'
+    - !createMap {}
+
+  #===========================================================================
+  Auto tiling: !template
+    #===========================================================================
+    reportTemplate: simpleReport.jrxml
+    attributes:
+      map: !map
+        maxDpi: 400
+        width: 780
+        height: 330
+    processors:
+    - !reportBuilder # compile all reports in current directory
+      directory: '.'
+    - !setTiledWms
+      maxWidth: 256
+      maxHeight: 256
+    - !createMap {}

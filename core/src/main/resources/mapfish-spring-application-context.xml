@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans default-lazy-init="false" xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+    <import resource="mapfish-spring-custom-fonts.xml" />
+    <import resource="mapfish-spring-config-objects.xml" />
+    <import resource="mapfish-spring-attributes.xml" />
+    <import resource="mapfish-spring-processors.xml" />
+    <import resource="mapfish-spring-layer-parser.xml" />
+    <import resource="mapfish-spring-style-parsers.xml" />
+    <import resource="mapfish-spring-config-file-loaders.xml" />
+    <import resource="mapfish-spring-config-output-formats.xml" />
+    <import resource="mapfish-spring-access-assertions.xml" />
+    <import resource="mapfish-spring-named-styles.xml" />
+    <import resource="mapfish-spring-hibernate.xml" />
+
+    <context:annotation-config/>
+    <context:property-placeholder system-properties-mode="OVERRIDE" file-encoding="UTF-8" location="classpath:mapfish-spring.properties"/>
+
+    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">-->
+        <!--<property name="pathMatcher">-->
+            <!--<bean class="org.mapfish.print.servlet.OptionalSecurePathMatcher" />-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <bean id="servletInfo" class="org.mapfish.print.servlet.ConfigBasedServletInfo">
+        <!-- If servlet id is not set then a random uuid will be used -->
+        <!--<property name="servletId" value="print-server-1" />-->
+    </bean>
+    <bean id="workingDirectories" class="org.mapfish.print.config.WorkingDirectories">
+        <property name="working" value="${workingDir}" />
+        <property name="maxAgeReport" value="${fileCleanUpMaxAgeReport}" />
+        <property name="maxAgeTaskDir" value="${fileCleanUpMaxAgeTaskDir}" />
+    </bean>
+
+    <bean id="configurationFactory" class="org.mapfish.print.config.ConfigurationFactory"/>
+    <bean id="processorDependencyGraphFactory" class="org.mapfish.print.processor.ProcessorDependencyGraphFactory" />
+
+    <bean id="registry" class="org.mapfish.print.servlet.registry.BasicRegistry">
+        <property name="timeToKeepAfterAccessInMinutes" value="30" />
+    </bean>
+
+    <bean id="jobQueue" class="org.mapfish.print.servlet.job.impl.RegistryJobQueue"></bean>
+    <bean id="jobManager" class="org.mapfish.print.servlet.job.impl.ThreadPoolJobManager">
+        <property name="maxNumberOfRunningPrintJobs" value="${maxNumberOfRunningPrintJobs}" />
+        <property name="maxNumberOfWaitingJobs" value="5000" />
+        <!-- Timeout for print jobs in seconds -->
+        <property name="timeout" value="${printTimeout}" />
+        <!-- Timeout after which a print job is canceled, if the status has not been checked (in seconds). -->
+        <property name="abandonedTimeout" value="120" />
+        <property name="oldFileCleanUp" value="${fileCleanUp}" />
+        <property name="oldFileCleanupInterval" value="${fileCleanUpInterval}" />
+    </bean>
+    <bean id="printJobPrototype" class="org.mapfish.print.servlet.job.impl.FilePrintJob" scope="prototype"/>
+    <bean id="fileReportLoader" class="org.mapfish.print.servlet.job.loader.FileReportLoader"/>
+
+    <bean id="metricRegistry" class="com.codahale.metrics.MetricRegistry"/>
+    <bean id="healthCheckRegistry" class="com.codahale.metrics.health.HealthCheckRegistry"/>
+    <bean id="httpClientFactory" class="org.mapfish.print.http.MfClientHttpRequestFactoryImpl">
+        <constructor-arg index="0" value="${maxConnectionsTotal}" />
+        <constructor-arg index="1" value="${maxConnectionsPerRoute}" />
+    </bean>
+    <bean id="metricNameStrategy" class="org.mapfish.print.metrics.MetricsNameStrategyFactory" factory-method="hostAndMethod" />
+    <bean id="loggingMetricsConfigurator" class="org.mapfish.print.metrics.LoggingMetricsConfigurator" lazy-init="false"/>
+    <bean id="jvmMetricsConfigurator" class="org.mapfish.print.metrics.JvmMetricsConfigurator" lazy-init="false"/>
+    <bean id="jmxMetricsReporter" class="org.mapfish.print.metrics.JmxMetricsReporter" lazy-init="false"/>
+    <bean id="statsDReporterInit" class="org.mapfish.print.metrics.StatsDReporterInit" lazy-init="false"/>
+    <bean id="accounting" class="org.mapfish.print.servlet.job.Accounting" lazy-init="false"/>
+
+    <bean id="forkJoinPool" class="java.util.concurrent.ForkJoinPool" destroy-method="shutdownNow">
+        <!--
+            Thread pool used to run processors.
+        -->
+        <constructor-arg index="0" value="${threadsParallelProcessors}" />
+    </bean>
+
+    <bean id="requestForkJoinPool" class="java.util.concurrent.ForkJoinPool" destroy-method="shutdownNow" autowire-candidate="false">
+        <!--
+            Thread pool used for making requests for tile/image layers.
+        -->
+        <constructor-arg index="0" value="${threadsParallelRequests}" />
+    </bean>
+
+    <bean id="mapPrinter" class="org.mapfish.print.MapPrinter" scope="prototype"/>
+    <bean id="configuration" class="org.mapfish.print.config.Configuration" scope="prototype"/>
+
+    <bean id="styleParser" class="org.mapfish.print.map.style.StyleParser" />
+    <bean id="imageIOPluginScanner" class="org.mapfish.print.ImageIOPluginScanner" />
+
+    <bean class="org.mapfish.print.ApplicationContextProvider" />
+</beans>

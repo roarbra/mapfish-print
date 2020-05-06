@@ -1,0 +1,10 @@
+templates:
+  main: !template
+    processors:
+      - !addHeaders
+        matchers:
+        - !localMatch {}
+        headers:
+          Cookie : [cookie-value, cookie-value2]
+          Header2 : [header2-value]
+      - !addHeadersTestProcessor {}

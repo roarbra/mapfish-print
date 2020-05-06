@@ -1,0 +1,37 @@
+throwErrorOnExtraParameters: true
+
+templates:
+  main: !template
+    reportTemplate: simple-map.jrxml
+    attributes:
+      legend: !legend
+        default:
+          name: "legendName"
+      title: !string
+        default: "title"
+      count: !integer
+        default: 134
+      ratio: !float
+        default: 2.0
+      datasource: !datasource
+        attributes:
+          table: !table {}
+          name: !string {}
+          count: !integer {}
+        default:
+          - name: "name"
+            count: 3
+            table:
+              columns:
+                - "id"
+                - "name"
+                - "icon"
+              data:
+                -
+                  - 1
+                  - "blah"
+                  - "icon_pan"
+                -
+                  - 2
+                  - "blip"
+                  - "icon_zoomin"

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+    <appender name="standardOut" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>gradle: %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.mapfish" level="WARN" />
+    <logger name="com.codahale" level="WARN" />
+    <logger name="org.springframework" level="WARN" />
+    <logger name="org.apache" level="WARN" />
+    <logger name="org.hibernate" level="WARN" />
+
+    <root level="INFO">
+        <appender-ref ref="standardOut" />
+    </root>
+</configuration>

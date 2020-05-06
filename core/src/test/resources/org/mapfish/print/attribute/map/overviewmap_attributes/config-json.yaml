@@ -1,0 +1,11 @@
+templates:
+  main: !template
+    attributes:
+      map: !map
+        width: 500
+        height: 100
+        maxDpi: 400
+      overviewMap: !overviewMap
+        width: 200
+        height: 100
+        maxDpi: 400

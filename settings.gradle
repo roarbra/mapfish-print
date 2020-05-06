@@ -1,1 +1,1 @@
-include 'e2e-tests'
+include 'core', 'examples', 'docs', 'publish'

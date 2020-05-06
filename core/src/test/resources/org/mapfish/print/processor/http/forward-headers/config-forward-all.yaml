@@ -1,0 +1,6 @@
+templates:
+  main: !template
+    processors:
+      - !forwardHeaders
+        all: true
+      - !forwardHeadersTestProcessor2 {}

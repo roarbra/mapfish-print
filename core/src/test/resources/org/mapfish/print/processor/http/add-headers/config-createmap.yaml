@@ -1,0 +1,9 @@
+templates:
+  main: !template
+    attributes:
+      map: !map
+        width: 500
+        height: 100
+    processors:
+    - !addHeaders {}
+    - !createMap {}

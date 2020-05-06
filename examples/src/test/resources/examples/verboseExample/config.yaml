@@ -1,0 +1,52 @@
+pdfConfig: !pdfConfig
+  compressed: false
+  author: "Mapfish Print"
+  subject: "Mapfish Print Verbose example"
+  creator: "Mapfish Print"
+
+throwErrorOnExtraParameters: true
+
+templates:
+  A4 portrait: !template
+    pdfConfig: !pdfConfig
+      title: "Verbose A4 Portrait"
+      keywords: ["legend", "table", "tablelist", "map", "verbose"]
+    reportTemplate: simpleReport.jrxml
+    attributes:
+      number: !integer {}
+      name: !string {}
+      description: !string {}
+      length: !float {}
+      map: !map
+        maxDpi: 400
+        dpiSuggestions: [72, 91, 128, 254, 300, 400]
+        width: 400
+        height: 200
+      legend: !legend {}
+      table: !table {}
+      datasource: !datasource
+        attributes:
+          displayName: !string {}
+          table: !table {}
+      scalebar: !scalebar
+        width: 230
+        height: 40
+    processors:
+    - !restrictUris
+      matchers:
+        - !localMatch
+          port : 8080
+          pathRegex : /.+
+    - !reportBuilder # compile all reports in current directory
+      directory: '.'
+    - !createMap {}
+    - !createScalebar {}
+    - !prepareLegend # create a datasource for the report with the 'legend' attribute
+      template: legend.jrxml
+    - !prepareTable {}
+    - !createDataSource
+      reportTemplate: table.jrxml
+      reportKey: reportTemplate
+      processors:
+        - !prepareTable {}
+    tableData: jrDataSource

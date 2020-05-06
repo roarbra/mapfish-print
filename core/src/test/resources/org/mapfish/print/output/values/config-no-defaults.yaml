@@ -1,0 +1,14 @@
+throwErrorOnExtraParameters: true
+templates:
+  main: !template
+    reportTemplate: simple-map.jrxml
+    attributes:
+      legend: !legend {}
+      title: !string {}
+      count: !integer {}
+      ratio: !float {}
+      datasource: !datasource
+        attributes:
+          table: !table {}
+          name: !string {}
+          count: !integer {}

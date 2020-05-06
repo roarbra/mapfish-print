@@ -1,0 +1,90 @@
+import org.gradle.api.tasks.testing.logging.TestLogEvent
+
+apply plugin: 'war'
+apply plugin: 'org.gretty'
+
+repositories {
+    maven { url 'https://maven.restlet.org' }
+    jcenter()
+}
+
+dependencies {
+    testCompile(
+            project(':core')
+    )
+}
+
+configurations {
+    compile.exclude module: 'jai_core'
+
+    // need to exclude those two to get rid of stuff taken from geotools dependencies (they break the tests)
+    compile.exclude group: 'org.eclipse.emf', module: 'ecore'
+    compile.exclude group: 'org.eclipse.emf', module: 'common'
+    compile.exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+}
+
+def examplesDir = "${project(':examples').projectDir}/src/test/resources/examples"
+
+task geoserverRun(type: Exec) {
+    description 'Run GeoServer with test data'
+    commandLine 'docker', 'run', '--rm', '--name=geoserver', '--publish=8090:8080', "--volume=${projectDir}/geoserver-data:/mnt/geoserver_datadir", '--detach', 'camptocamp/geoserver'
+}
+
+task geoserverSleep(type: Exec) {
+    commandLine 'sleep', '10'
+    dependsOn 'geoserverRun'
+}
+
+task geoserver(type: Exec) {
+    description 'Run and wait for GeoServer with test data'
+    commandLine 'curl', 'http://localhost:8090/web/', '--output', '/dev/null'
+    dependsOn 'geoserverSleep'
+}
+
+gretty {
+    // configuration to serve a web-app containing test data required for
+    // the integration tests
+    servletContainer = 'jetty9'
+    integrationTestTask = 'integrationTest'
+}
+
+farm {
+    // configuration to start a server running mfp, geoserver and the web-app
+    // containing test data. start with `./gradlew examples:farmRun`
+    systemProperty 'path_to_examples', examplesDir
+    jvmArgs = ['-Xmx500M']
+    scanInterval = 0
+
+    webapp ':core'
+    webapp ':examples'
+}
+
+// prevent that the tests target can be directly called. the integration tests
+// must be run with `./gradlew examples:geoserver` to make sure the
+// server is running
+test {}
+test.onlyIf { false }
+
+task integrationTest(type: Test) {
+    testLogging {
+        exceptionFormat = 'full'
+        showCauses true
+        showExceptions true
+        showStackTraces true
+        events TestLogEvent.STANDARD_OUT
+    }
+    maxHeapSize = "750M"
+    reports {
+        junitXml.enabled = true
+        html.enabled = true
+    }
+//    dependsOn ':core:compileJava', 'geoserver', 'farmIntegrationTest'
+}
+integrationTest.dependsOn ':core:compileJava', 'geoserver'
+
+afterEvaluate {
+    build.dependsOn project.tasks['farmIntegrationTest']
+    farmRun.dependsOn geoserver
+    farmBeforeIntegrationTest.dependsOn geoserver
+//    build.dependsOn project.tasks['integrationTest']
+}

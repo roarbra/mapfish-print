@@ -1,0 +1,6 @@
+templates:
+  main: !template
+    processors:
+      - !forwardHeaders
+        headers: [header1, Header2]
+      - !forwardHeadersTestProcessor {}

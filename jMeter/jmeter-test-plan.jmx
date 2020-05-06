@@ -1,0 +1,1334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="2.6" jmeter="2.11 r1554548">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="MapFish Print Server Config" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="printServer" elementType="Argument">
+            <stringProp name="Argument.name">printServer</stringProp>
+            <stringProp name="Argument.value">127.0.0.1</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="port" elementType="Argument">
+            <stringProp name="Argument.name">port</stringProp>
+            <stringProp name="Argument.value">8085</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="servletName" elementType="Argument">
+            <stringProp name="Argument.name">servletName</stringProp>
+            <stringProp name="Argument.value">/print-servlet-3.3-SNAPSHOT</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </Arguments>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Create And Get Report" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">100</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">10</stringProp>
+        <longProp name="ThreadGroup.start_time">1403528769000</longProp>
+        <longProp name="ThreadGroup.end_time">1403528769000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="reportId" elementType="Argument">
+              <stringProp name="Argument.name">reportId</stringProp>
+              <stringProp name="Argument.value"></stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="done" elementType="Argument">
+              <stringProp name="Argument.name">done</stringProp>
+              <stringProp name="Argument.value">false</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+        </Arguments>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Create Report Request" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+    &quot;attributes&quot;: {&#xd;
+        &quot;comments&quot;: &quot;&quot;,&#xd;
+        &quot;datasource&quot;: [],&#xd;
+        &quot;debug&quot;: &quot;0&quot;,&#xd;
+        &quot;legend&quot;: {&quot;classes&quot;: [{&#xd;
+            &quot;classes&quot;: [{&#xd;
+                &quot;icons&quot;: [&quot;http://geomapfish.demo-camptocamp.com/1.6/wsgi/mapserv_proxy?TRANSPARENT=TRUE&amp;SERVICE=WMS&amp;VERSION=1.1.1&amp;REQUEST=GetLegendGraphic&amp;EXCEPTIONS=application%2Fvnd.ogc.se_xml&amp;LAYER=fuel&amp;FORMAT=image%2Fpng&amp;SCALE=100000&quot;],&#xd;
+                &quot;name&quot;: &quot;fuel&quot;&#xd;
+            }],&#xd;
+            &quot;name&quot;: &quot;&quot;&#xd;
+        }]},&#xd;
+        &quot;map&quot;: {&#xd;
+            &quot;center&quot;: [&#xd;
+                534850,&#xd;
+                153550&#xd;
+            ],&#xd;
+            &quot;dpi&quot;: 254,&#xd;
+            &quot;layers&quot;: [&#xd;
+                {&#xd;
+                    &quot;baseURL&quot;: &quot;http://geomapfish.demo-camptocamp.com/1.6/wsgi/mapserv_proxy&quot;,&#xd;
+                    &quot;customParams&quot;: {&quot;TRANSPARENT&quot;: true},&#xd;
+                    &quot;imageFormat&quot;: &quot;image/png&quot;,&#xd;
+                    &quot;layers&quot;: [&quot;fuel&quot;],&#xd;
+                    &quot;opacity&quot;: 1,&#xd;
+                    &quot;styles&quot;: [&quot;&quot;],&#xd;
+                    &quot;type&quot;: &quot;wms&quot;&#xd;
+                },&#xd;
+                {&#xd;
+                    &quot;baseURL&quot;: &quot;http://ows.asitvd.ch/wmts/1.0.0/asitvd.fond_couleur/default/{DIM1}/{ELEVATION}/{TileMatrixSet}/{TileMatrix}/{TileRow}/{TileCol}.png&quot;,&#xd;
+                    &quot;dimensionParams&quot;: {&#xd;
+                        &quot;DIM1&quot;: &quot;default&quot;,&#xd;
+                        &quot;ELEVATION&quot;: &quot;0&quot;&#xd;
+                    },&#xd;
+                    &quot;dimensions&quot;: [&#xd;
+                        &quot;DIM1&quot;,&#xd;
+                        &quot;ELEVATION&quot;&#xd;
+                    ],&#xd;
+                    &quot;imageFormat&quot;: &quot;image/png&quot;,&#xd;
+                    &quot;layer&quot;: &quot;asitvd.fond_couleur&quot;,&#xd;
+                    &quot;matrices&quot;: [&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 0,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                1,&#xd;
+                                1&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 1.4285714285714287E7,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 1,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                1,&#xd;
+                                1&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 1.3392857142857142E7,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 2,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                1,&#xd;
+                                1&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 12500000,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 3,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                1,&#xd;
+                                1&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 1.1607142857142856E7,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 4,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                1,&#xd;
+                                1&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 1.0714285714285713E7,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 5,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                1,&#xd;
+                                1&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 9821428.571428573,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 6,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                1,&#xd;
+                                1&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 8928571.428571427,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 7,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                1,&#xd;
+                                1&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 8035714.285714286,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 8,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                1,&#xd;
+                                1&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 7142857.142857144,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 9,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                2,&#xd;
+                                1&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 6250000,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 10,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                2,&#xd;
+                                1&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 5357142.857142856,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 11,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                2,&#xd;
+                                1&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 4464285.714285714,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 12,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                2,&#xd;
+                                2&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 3571428.571428572,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 13,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                3,&#xd;
+                                2&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 2678571.428571428,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 14,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                3,&#xd;
+                                2&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 2321428.571428572,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 15,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                4,&#xd;
+                                3&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 1785714.285714286,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 16,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                8,&#xd;
+                                5&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 892857.142857143,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 17,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                19,&#xd;
+                                13&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 357142.85714285716,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 18,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                38,&#xd;
+                                25&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 178571.42857142858,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 19,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                94,&#xd;
+                                63&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 71428.57142857143,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 20,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                188,&#xd;
+                                125&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 35714.28571428572,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 21,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                375,&#xd;
+                                250&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 17857.14285714286,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 22,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                750,&#xd;
+                                500&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 8928.57142857143,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 23,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                938,&#xd;
+                                625&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 7142.857142857143,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 24,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                1250,&#xd;
+                                834&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 5357.142857142858,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 25,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                1875,&#xd;
+                                1250&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 3571.4285714285716,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 26,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                3750,&#xd;
+                                2500&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 1785.7142857142858,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 27,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                7500,&#xd;
+                                5000&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 892.8571428571429,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 28,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                18750,&#xd;
+                                12500&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 357.14285714285717,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;identifier&quot;: 29,&#xd;
+                            &quot;matrixSize&quot;: [&#xd;
+                                37500,&#xd;
+                                25000&#xd;
+                            ],&#xd;
+                            &quot;scaleDenominator&quot;: 178.57142857142858,&#xd;
+                            &quot;tileSize&quot;: [&#xd;
+                                256,&#xd;
+                                256&#xd;
+                            ],&#xd;
+                            &quot;topLeftCorner&quot;: [&#xd;
+                                420000,&#xd;
+                                350000&#xd;
+                            ]&#xd;
+                        }&#xd;
+                    ],&#xd;
+                    &quot;matrixSet&quot;: &quot;21781&quot;,&#xd;
+                    &quot;opacity&quot;: 1,&#xd;
+                    &quot;requestEncoding&quot;: &quot;REST&quot;,&#xd;
+                    &quot;style&quot;: &quot;default&quot;,&#xd;
+                    &quot;type&quot;: &quot;wmts&quot;,&#xd;
+                    &quot;version&quot;: &quot;1.0.0&quot;&#xd;
+                }&#xd;
+            ],&#xd;
+            &quot;longitudeFirst&quot;: true,&#xd;
+            &quot;projection&quot;: &quot;EPSG:21781&quot;,&#xd;
+            &quot;rotation&quot;: 0,&#xd;
+            &quot;scale&quot;: 100000&#xd;
+        },&#xd;
+        &quot;title&quot;: &quot;&quot;&#xd;
+    },&#xd;
+    &quot;layout&quot;: &quot;A4 portrait&quot;&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${printServer}</stringProp>
+          <stringProp name="HTTPSampler.port">${port}</stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">${servletName}/print/demo_geomapfish/report.pdf</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Report ID Extractor" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">reportId</stringProp>
+            <stringProp name="RegexExtractor.regex">&quot;ref&quot;:&quot;([^.&quot;]+)&quot;,</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default">REGEX BROKEN</stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Reset done" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">code</stringProp>
+            <stringProp name="RegexExtractor.refname">done</stringProp>
+            <stringProp name="RegexExtractor.regex">(shouldnotmatch)</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default">false</stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Create Successful" enabled="true">
+          <stringProp name="IfController.condition">&quot;${reportId}&quot;!=&quot;REGEX BROKEN&quot;</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+        </IfController>
+        <hashTree>
+          <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="While Controller" enabled="true">
+            <stringProp name="WhileController.condition">${__javaScript(&quot;${done}&quot;==&quot;false&quot;)} </stringProp>
+          </WhileController>
+          <hashTree>
+            <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="false">
+              <boolProp name="displayJMeterProperties">false</boolProp>
+              <boolProp name="displayJMeterVariables">true</boolProp>
+              <boolProp name="displaySystemProperties">false</boolProp>
+            </DebugSampler>
+            <hashTree/>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Status" enabled="true">
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${printServer}</stringProp>
+              <stringProp name="HTTPSampler.port">${port}</stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              <stringProp name="HTTPSampler.protocol"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">http://${printServer}:${port}${servletName}/print/status/${reportId}.json</stringProp>
+              <stringProp name="HTTPSampler.method">GET</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <boolProp name="HTTPSampler.monitor">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Status Extractor" enabled="true">
+                <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+                <stringProp name="RegexExtractor.refname">done</stringProp>
+                <stringProp name="RegexExtractor.regex">&quot;done&quot;:([^&quot;,.]+),</stringProp>
+                <stringProp name="RegexExtractor.template">$1$</stringProp>
+                <stringProp name="RegexExtractor.default">REGEX BROKEN</stringProp>
+                <stringProp name="RegexExtractor.match_number">1</stringProp>
+              </RegexExtractor>
+              <hashTree/>
+            </hashTree>
+            <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+              <stringProp name="ConstantTimer.delay">300</stringProp>
+            </ConstantTimer>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Report" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${printServer}</stringProp>
+            <stringProp name="HTTPSampler.port">${port}</stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">http://${printServer}:${port}${servletName}/print/report/${reportId}</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Report valid" enabled="true">
+              <collectionProp name="Asserion.test_strings">
+                <stringProp name="49586">200</stringProp>
+              </collectionProp>
+              <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
+              <intProp name="Assertion.test_type">8</intProp>
+            </ResponseAssertion>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="false">
+          <boolProp name="displayJMeterProperties">false</boolProp>
+          <boolProp name="displayJMeterVariables">true</boolProp>
+          <boolProp name="displaySystemProperties">false</boolProp>
+        </DebugSampler>
+        <hashTree/>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">true</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>false</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+            </value>
+          </objProp>
+          <stringProp name="filename">/home/tsauerwein/Downloads/apache-jmeter-2.11/mfp-log.jtl</stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Simple Data Writer" enabled="false">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>true</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>false</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+            </value>
+          </objProp>
+          <stringProp name="filename">/home/tsauerwein/Downloads/apache-jmeter-2.11/mfp-log.jtl</stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Get Example" enabled="false">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">100</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1403532164000</longProp>
+        <longProp name="ThreadGroup.end_time">1403532164000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Example Request" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${printServer}</stringProp>
+          <stringProp name="HTTPSampler.port">{port}</stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">${servletName}/print/verboseExample/capabilities.json</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>false</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Build Report" enabled="false">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">50</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">5</stringProp>
+        <longProp name="ThreadGroup.start_time">1403532288000</longProp>
+        <longProp name="ThreadGroup.end_time">1403532288000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Build Report Request" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+    &quot;attributes&quot;: {&#xd;
+        &quot;description&quot;: &quot;Hello every body !&quot;,&#xd;
+        &quot;legend&quot;: {&#xd;
+            &quot;classes&quot;: [&#xd;
+                {&#xd;
+                    &quot;icons&quot;: [&quot;http://localhost:9876/e2egeoserver/www/legends/arbres.png&quot;],&#xd;
+                    &quot;name&quot;: &quot;Arbres&quot;&#xd;
+                },&#xd;
+                {&#xd;
+                    &quot;icons&quot;: [&quot;http://localhost:9876/e2egeoserver/www/legends/perturbations.png&quot;],&#xd;
+                    &quot;name&quot;: &quot;Peturbations&quot;&#xd;
+                },&#xd;
+                {&#xd;
+                    &quot;icons&quot;: [&quot;http://localhost:9876/e2egeoserver/www/legends/points-de-vente.png&quot;],&#xd;
+                    &quot;name&quot;: &quot;Points de vente&quot;&#xd;
+                },&#xd;
+                {&#xd;
+                    &quot;icons&quot;: [&quot;http://localhost:9876/e2egeoserver/www/legends/stationement.png&quot;],&#xd;
+                    &quot;name&quot;: &quot;Stationement&quot;&#xd;
+                }&#xd;
+            ],&#xd;
+            &quot;name&quot;: &quot;&quot;&#xd;
+        },&#xd;
+        &quot;length&quot;: 45.123,&#xd;
+        &quot;map&quot;: {&#xd;
+            &quot;bbox&quot;: [&#xd;
+                100,&#xd;
+                -1,&#xd;
+                106,&#xd;
+                2&#xd;
+            ],&#xd;
+            &quot;dpi&quot;: 90,&#xd;
+            &quot;layers&quot;: [{&#xd;
+                &quot;geoJson&quot;: &quot;file://resources/geojson.json&quot;,&#xd;
+                &quot;style&quot;: &quot;polygon&quot;,&#xd;
+                &quot;type&quot;: &quot;geojson&quot;&#xd;
+            }],&#xd;
+            &quot;projection&quot;: &quot;CRS:84&quot;,&#xd;
+            &quot;rotation&quot;: 0&#xd;
+        },&#xd;
+        &quot;name&quot;: &quot;Hello&quot;,&#xd;
+        &quot;number&quot;: 45,&#xd;
+        &quot;table&quot;: {&#xd;
+            &quot;columns&quot;: [&#xd;
+                &quot;id&quot;,&#xd;
+                &quot;name&quot;,&#xd;
+                &quot;icon&quot;&#xd;
+            ],&#xd;
+            &quot;data&quot;: [&#xd;
+                [&#xd;
+                    1,&#xd;
+                    &quot;blah&quot;,&#xd;
+                    &quot;icon_pan&quot;&#xd;
+                ],&#xd;
+                [&#xd;
+                    2,&#xd;
+                    &quot;blip&quot;,&#xd;
+                    &quot;icon_zoomin&quot;&#xd;
+                ]&#xd;
+            ]&#xd;
+        },&#xd;
+        &quot;tableList&quot;: [&#xd;
+            {&#xd;
+                &quot;columns&quot;: [&#xd;
+                    &quot;id&quot;,&#xd;
+                    &quot;name&quot;,&#xd;
+                    &quot;icon&quot;&#xd;
+                ],&#xd;
+                &quot;data&quot;: [&#xd;
+                    [&#xd;
+                        1,&#xd;
+                        &quot;blah&quot;,&#xd;
+                        &quot;icon_pan&quot;&#xd;
+                    ],&#xd;
+                    [&#xd;
+                        2,&#xd;
+                        &quot;blip&quot;,&#xd;
+                        &quot;icon_zoomin&quot;&#xd;
+                    ]&#xd;
+                ],&#xd;
+                &quot;displayName&quot;: &quot;Feature 1&quot;,&#xd;
+                &quot;id&quot;: &quot;f1&quot;&#xd;
+            },&#xd;
+            {&#xd;
+                &quot;columns&quot;: [&#xd;
+                    &quot;id&quot;,&#xd;
+                    &quot;name&quot;,&#xd;
+                    &quot;icon&quot;&#xd;
+                ],&#xd;
+                &quot;data&quot;: [&#xd;
+                    [&#xd;
+                        10,&#xd;
+                        &quot;blah2&quot;,&#xd;
+                        &quot;icon_pan2&quot;&#xd;
+                    ],&#xd;
+                    [&#xd;
+                        20,&#xd;
+                        &quot;blip2&quot;,&#xd;
+                        &quot;icon_zoomin2&quot;&#xd;
+                    ]&#xd;
+                ],&#xd;
+                &quot;displayName&quot;: &quot;Feature 2&quot;,&#xd;
+                &quot;id&quot;: &quot;f2&quot;&#xd;
+            }&#xd;
+        ]&#xd;
+    },&#xd;
+    &quot;layout&quot;: &quot;A4 portrait&quot;&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${printServer}</stringProp>
+          <stringProp name="HTTPSampler.port">{port}</stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">${servletName}/print/verboseExample/buildreport.pdf</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>false</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Only Create Report" enabled="false">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">4</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">5000</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">20</stringProp>
+        <longProp name="ThreadGroup.start_time">1403528769000</longProp>
+        <longProp name="ThreadGroup.end_time">1403528769000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Create Report Request" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+    &quot;attributes&quot;: {&#xd;
+        &quot;description&quot;: &quot;Hello every body !&quot;,&#xd;
+        &quot;legend&quot;: {&#xd;
+            &quot;classes&quot;: [&#xd;
+                {&#xd;
+                    &quot;icons&quot;: [&quot;http://localhost:9876/e2egeoserver/www/legends/arbres.png&quot;],&#xd;
+                    &quot;name&quot;: &quot;Arbres&quot;&#xd;
+                },&#xd;
+                {&#xd;
+                    &quot;icons&quot;: [&quot;http://localhost:9876/e2egeoserver/www/legends/perturbations.png&quot;],&#xd;
+                    &quot;name&quot;: &quot;Peturbations&quot;&#xd;
+                },&#xd;
+                {&#xd;
+                    &quot;icons&quot;: [&quot;http://localhost:9876/e2egeoserver/www/legends/points-de-vente.png&quot;],&#xd;
+                    &quot;name&quot;: &quot;Points de vente&quot;&#xd;
+                },&#xd;
+                {&#xd;
+                    &quot;icons&quot;: [&quot;http://localhost:9876/e2egeoserver/www/legends/stationement.png&quot;],&#xd;
+                    &quot;name&quot;: &quot;Stationement&quot;&#xd;
+                }&#xd;
+            ],&#xd;
+            &quot;name&quot;: &quot;&quot;&#xd;
+        },&#xd;
+        &quot;length&quot;: 45.123,&#xd;
+        &quot;map&quot;: {&#xd;
+            &quot;bbox&quot;: [&#xd;
+                100,&#xd;
+                -1,&#xd;
+                106,&#xd;
+                2&#xd;
+            ],&#xd;
+            &quot;dpi&quot;: 90,&#xd;
+            &quot;layers&quot;: [{&#xd;
+                &quot;geoJson&quot;: &quot;file://resources/geojson.json&quot;,&#xd;
+                &quot;style&quot;: &quot;polygon&quot;,&#xd;
+                &quot;type&quot;: &quot;geojson&quot;&#xd;
+            }],&#xd;
+            &quot;projection&quot;: &quot;CRS:84&quot;,&#xd;
+            &quot;rotation&quot;: 0&#xd;
+        },&#xd;
+        &quot;name&quot;: &quot;Hello&quot;,&#xd;
+        &quot;number&quot;: 45,&#xd;
+        &quot;table&quot;: {&#xd;
+            &quot;columns&quot;: [&#xd;
+                &quot;id&quot;,&#xd;
+                &quot;name&quot;,&#xd;
+                &quot;icon&quot;&#xd;
+            ],&#xd;
+            &quot;data&quot;: [&#xd;
+                [&#xd;
+                    1,&#xd;
+                    &quot;blah&quot;,&#xd;
+                    &quot;icon_pan&quot;&#xd;
+                ],&#xd;
+                [&#xd;
+                    2,&#xd;
+                    &quot;blip&quot;,&#xd;
+                    &quot;icon_zoomin&quot;&#xd;
+                ]&#xd;
+            ]&#xd;
+        },&#xd;
+        &quot;tableList&quot;: [&#xd;
+            {&#xd;
+                &quot;columns&quot;: [&#xd;
+                    &quot;id&quot;,&#xd;
+                    &quot;name&quot;,&#xd;
+                    &quot;icon&quot;&#xd;
+                ],&#xd;
+                &quot;data&quot;: [&#xd;
+                    [&#xd;
+                        1,&#xd;
+                        &quot;blah&quot;,&#xd;
+                        &quot;icon_pan&quot;&#xd;
+                    ],&#xd;
+                    [&#xd;
+                        2,&#xd;
+                        &quot;blip&quot;,&#xd;
+                        &quot;icon_zoomin&quot;&#xd;
+                    ]&#xd;
+                ],&#xd;
+                &quot;displayName&quot;: &quot;Feature 1&quot;,&#xd;
+                &quot;id&quot;: &quot;f1&quot;&#xd;
+            },&#xd;
+            {&#xd;
+                &quot;columns&quot;: [&#xd;
+                    &quot;id&quot;,&#xd;
+                    &quot;name&quot;,&#xd;
+                    &quot;icon&quot;&#xd;
+                ],&#xd;
+                &quot;data&quot;: [&#xd;
+                    [&#xd;
+                        10,&#xd;
+                        &quot;blah2&quot;,&#xd;
+                        &quot;icon_pan2&quot;&#xd;
+                    ],&#xd;
+                    [&#xd;
+                        20,&#xd;
+                        &quot;blip2&quot;,&#xd;
+                        &quot;icon_zoomin2&quot;&#xd;
+                    ]&#xd;
+                ],&#xd;
+                &quot;displayName&quot;: &quot;Feature 2&quot;,&#xd;
+                &quot;id&quot;: &quot;f2&quot;&#xd;
+            }&#xd;
+        ]&#xd;
+    },&#xd;
+    &quot;layout&quot;: &quot;A4 portrait&quot;&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${printServer}</stringProp>
+          <stringProp name="HTTPSampler.port">${port}</stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">${servletName}/print/verboseExample/report.pdf</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Report ID Extractor" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">reportId</stringProp>
+            <stringProp name="RegexExtractor.regex">&quot;ref&quot;:&quot;([^.&quot;]+)&quot;,</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default">REGEX BROKEN</stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+        </hashTree>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">true</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>false</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+            </value>
+          </objProp>
+          <stringProp name="filename">/home/tsauerwein/Downloads/apache-jmeter-2.11/mfp-log.jtl</stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Only Create Report (Large Request)" enabled="false">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">700</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">20</stringProp>
+        <longProp name="ThreadGroup.start_time">1403528769000</longProp>
+        <longProp name="ThreadGroup.end_time">1403528769000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Create Report Request" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${printServer}</stringProp>
+          <stringProp name="HTTPSampler.port">${port}</stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">${servletName}/print/verboseExample/report.pdf</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <elementProp name="HTTPsampler.Files" elementType="HTTPFileArgs">
+            <collectionProp name="HTTPFileArgs.files">
+              <elementProp name="/home/tsauerwein/projects/mapfish-printV3/jMeter/large-request.json" elementType="HTTPFileArg">
+                <stringProp name="File.path">/home/tsauerwein/projects/mapfish-printV3/jMeter/large-request.json</stringProp>
+                <stringProp name="File.paramname"></stringProp>
+                <stringProp name="File.mimetype">application/json</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Report ID Extractor" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">reportId</stringProp>
+            <stringProp name="RegexExtractor.regex">&quot;ref&quot;:&quot;([^.&quot;]+)&quot;,</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default">REGEX BROKEN</stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+        </hashTree>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>false</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+          <boolProp name="ResultCollector.success_only_logging">true</boolProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

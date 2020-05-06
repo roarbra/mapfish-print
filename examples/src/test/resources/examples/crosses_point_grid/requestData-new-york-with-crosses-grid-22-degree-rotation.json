@@ -1,0 +1,34 @@
+{
+  "layout": "A4 landscape",
+  "outputFormat": "pdf",
+  "attributes": {
+    "map": {
+      "projection": "EPSG:3857",
+      "dpi": 254,
+      "rotation": 22,
+      "center": [-8233518.5005945, 4980320.4059228],
+      "scale": 25000,
+      "layers": [
+        {
+          "type": "grid",
+          "gridType": "points",
+          "numberOfLines": [5, 5],
+          "renderAsSvg": true,
+          "valueFormat": "###,###",
+          "unitFormat": " %s",
+          "formatGroupingSeparator": "'",
+          "font" : {
+            "name" : ["Arial", "Helvetica", "Nimbus Sans L", "Liberation Sans", "FreeSans", "Sans-serif"]
+          }
+        },
+        {
+          "baseURL": "http://localhost:8090/wms",
+          "opacity": 1,
+          "type": "WMS",
+          "layers": ["tiger-ny"],
+          "imageFormat": "image/png"
+        }
+      ]
+    }
+  }
+}

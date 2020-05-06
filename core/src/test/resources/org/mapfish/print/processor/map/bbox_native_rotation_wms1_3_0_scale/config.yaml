@@ -1,0 +1,10 @@
+templates:
+  main: !template
+    reportTemplate: "dummy.jxml"
+    attributes:
+      map: !map
+        maxDpi: 400
+        width: 780
+        height: 330
+    processors:
+    - !createMap {}

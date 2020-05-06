@@ -1,0 +1,28 @@
+throwErrorOnExtraParameters: true
+
+templates:
+  A4 portrait: !template
+    reportTemplate: simpleReport.jrxml
+    attributes:
+      number: !integer {}
+      name: !string {}
+      description: !string {}
+      length: !float {}
+      map: !map
+        maxDpi: 400
+        width: 400
+        height: 200
+      datasource: !datasource
+        attributes:
+          displayName: !string {}
+          table: !table {}
+    processors:
+    - !reportBuilder # compile all reports in current directory
+      directory: '.'
+    - !createMap {}
+    - !createDataSource
+      reportTemplate: table.jrxml
+      reportKey: reportTemplate
+      processors:
+        - !prepareTable {}
+    tableData: jrDataSource

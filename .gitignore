@@ -9,3 +9,5 @@ deploy.sh
 mapfish-print.ipr
 mapfish-print.iws
 /.nb-gradle/private/
+/bin/
+.project
